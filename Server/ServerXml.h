@@ -8,18 +8,20 @@
 class ServerXml  {
 
 public:
-    ServerXml();
+    ServerXml(const string & fileXmlPath = "ServerXML.xml");
     ~ServerXml();    
     void update();
-
+    string fileXmlPath() const { return m_fileXmlPath; }
+    string & xmlFilePath() { return m_fileXmlPath; }
 private:
-    ServerNetwork * m_network;
+    ServerNetwork m_network;
 
     enum Command {Add, Get, Set, Unknown};  
     bool parseCommand(const string & command, Command & type, 
                       string & tagName, string & tagValue);
     friend std::ostream & operator<<(std::ostream & os, Command type);
 
+    string m_fileXmlPath;
     TiXmlDocument m_doc;
     string createXml(const string & command);
     

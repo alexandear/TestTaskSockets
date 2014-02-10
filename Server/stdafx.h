@@ -3,6 +3,7 @@
 
 #define WIN32_LEAN_AND_MEAN
 
+#include <cstdlib>
 #include <iostream>
 #include <regex>
 #include <string>

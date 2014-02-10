@@ -13,7 +13,7 @@ public:
     void update(const std::string & command);
 
 private:
-    ClientNetwork * network;
+    ClientNetwork m_network;
 
 };
 

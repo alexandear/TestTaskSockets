@@ -2,23 +2,31 @@
 #include "ServerXml.h"
 
 
-ServerXml::ServerXml() : m_network(new ServerNetwork), m_doc(TiXmlDocument("file.xml")) {
+ServerXml::ServerXml(const string & fileXmlPath) : m_fileXmlPath(fileXmlPath) {
+    
+    char * systemRoot = nullptr;
+    size_t len = 0;
+    errno_t err = _dupenv_s(&systemRoot, &len, "SystemRoot");
+    if (err == 0) {
+        m_fileXmlPath = string(systemRoot) + "//system32//LogFiles//ServerXML.xml";
+    }
+
+    m_doc = TiXmlDocument(m_fileXmlPath);
+    free(systemRoot);
 
     TiXmlDeclaration * decl = new TiXmlDeclaration( "1.0", "", "" );
     m_doc.LinkEndChild(decl);
 }
 
 
-ServerXml::~ServerXml() {
-    delete m_network;
-}
+ServerXml::~ServerXml() { }
 
 
 void ServerXml::update() {
     char buffer[ServerNetwork::DefaultBufferLength] = {};
-    if (m_network->receiveData(buffer, ServerNetwork::DefaultBufferLength) > 0) {
+    if (m_network.receiveData(buffer, ServerNetwork::DefaultBufferLength) > 0) {
         string reply = createXml(string(buffer));
-        m_network->sendData(reply.c_str());
+        m_network.sendData(reply.c_str());
     }
 }
 

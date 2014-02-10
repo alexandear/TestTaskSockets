@@ -2,7 +2,8 @@
 #include "ClientNetwork.h"
 
 
-const char * ClientNetwork::DefaultPort = "27015";
+const std::string ClientNetwork::DefaultPort = "27015";
+const std::string ClientNetwork::ServerAdress = "127.0.0.1";
 
 
 ClientNetwork::ClientNetwork() : ConnectSocket(INVALID_SOCKET) {
@@ -25,7 +26,7 @@ ClientNetwork::ClientNetwork() : ConnectSocket(INVALID_SOCKET) {
     hints.ai_protocol = IPPROTO_TCP;
 
     // Resolve the server address and port
-    iResult = getaddrinfo("127.0.0.1", DefaultPort, &hints, &result);
+    iResult = getaddrinfo(ServerAdress.c_str(), DefaultPort.c_str(), &hints, &result);
     if ( iResult != 0 ) {
         cout << "getaddrinfo failed with error: " << iResult << endl;
         WSACleanup();

@@ -2,7 +2,7 @@
 #include "ServerNetwork.h"
 
 
-const char * ServerNetwork::DefaultPort = "27015";
+const std::string ServerNetwork::DefaultPort = "27015";
 
 
 ServerNetwork::ServerNetwork() : ListenSocket(INVALID_SOCKET), ClientSocket(INVALID_SOCKET) {
@@ -27,7 +27,7 @@ ServerNetwork::ServerNetwork() : ListenSocket(INVALID_SOCKET), ClientSocket(INVA
     hints.ai_flags = AI_PASSIVE;
 
     // Resolve the server address and port
-    iResult = getaddrinfo(nullptr, DefaultPort, &hints, &result);
+    iResult = getaddrinfo(nullptr, DefaultPort.c_str(), &hints, &result);
     if ( iResult != 0 ) {
         cout << "getaddrinfo failed with error: " << iResult << endl;
         WSACleanup();

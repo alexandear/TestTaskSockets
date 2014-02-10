@@ -7,7 +7,7 @@
 class ServerNetwork {
 
 public:
-    static const char * DefaultPort;
+    static const std::string DefaultPort;
     static const int DefaultBufferLength = 512;
 
     ServerNetwork();
