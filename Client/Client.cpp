@@ -19,5 +19,5 @@ int main() {
         getline(cin, command);
     }
 
-	return 0;
+    return 0;
 }

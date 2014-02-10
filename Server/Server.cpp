@@ -50,13 +50,13 @@ VOID WINAPI ServiceMain (DWORD argc, LPTSTR *argv) {
     g_ServiceStatus.dwCheckPoint = 0;
 
     if (SetServiceStatus (g_StatusHandle, &g_ServiceStatus) == FALSE) {
-        OutputDebugString(L"My Sample Service: ServiceMain: SetServiceStatus returned error");
+        OutputDebugString(L"ServerXML: ServiceMain: SetServiceStatus returned error");
     }
 
     // Create stop event to wait on later.
     g_ServiceStopEvent = CreateEvent (nullptr, TRUE, FALSE, nullptr);
     if (g_ServiceStopEvent == nullptr) {
-        OutputDebugString(L"My Sample Service: ServiceMain: CreateEvent(g_ServiceStopEvent) returned error");
+        OutputDebugString(L"ServerXML: ServiceMain: CreateEvent(g_ServiceStopEvent) returned error");
 
         g_ServiceStatus.dwControlsAccepted = 0;
         g_ServiceStatus.dwCurrentState = SERVICE_STOPPED;
@@ -64,8 +64,8 @@ VOID WINAPI ServiceMain (DWORD argc, LPTSTR *argv) {
         g_ServiceStatus.dwCheckPoint = 1;
 
         if (SetServiceStatus (g_StatusHandle, &g_ServiceStatus) == FALSE) {
-		    OutputDebugString(L"ServerXml: ServiceMain: SetServiceStatus returned error");
-	    }
+            OutputDebugString(L"ServerXml: ServiceMain: SetServiceStatus returned error");
+        }
         return;
     }    
 
@@ -76,7 +76,7 @@ VOID WINAPI ServiceMain (DWORD argc, LPTSTR *argv) {
     g_ServiceStatus.dwCheckPoint = 0;
 
     if (SetServiceStatus (g_StatusHandle, &g_ServiceStatus) == FALSE) {
-	    OutputDebugString(L"ServerXml: ServiceMain: SetServiceStatus returned error");
+        OutputDebugString(L"ServerXml: ServiceMain: SetServiceStatus returned error");
     }
 
     // Start the thread that will perform the main task of the service
@@ -96,7 +96,7 @@ VOID WINAPI ServiceMain (DWORD argc, LPTSTR *argv) {
     g_ServiceStatus.dwCheckPoint = 3;
 
     if (SetServiceStatus (g_StatusHandle, &g_ServiceStatus) == FALSE) {
-	    OutputDebugString(L"ServerXml: ServiceMain: SetServiceStatus returned error");
+        OutputDebugString(L"ServerXml: ServiceMain: SetServiceStatus returned error");
     }
 
     return;
@@ -117,8 +117,8 @@ VOID WINAPI ServiceCtrlHandler (DWORD CtrlCode) {
         g_ServiceStatus.dwCheckPoint = 4;
 
         if (SetServiceStatus (g_StatusHandle, &g_ServiceStatus) == FALSE) {
-			OutputDebugString(L"ServerXml: ServiceCtrlHandler: SetServiceStatus returned error");
-		}
+            OutputDebugString(L"ServerXml: ServiceCtrlHandler: SetServiceStatus returned error");
+        }
 
         // This will signal the worker thread to start shutting down
         SetEvent (g_ServiceStopEvent);
