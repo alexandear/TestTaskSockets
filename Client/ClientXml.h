@@ -9,7 +9,6 @@ class ClientXml {
 
 public:
     ClientXml();
-    ~ClientXml();
     void update(const std::string & command);
 
 private:

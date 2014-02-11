@@ -5,9 +5,6 @@
 ClientXml::ClientXml() { }
 
 
-ClientXml::~ClientXml() { }
-
-
 void ClientXml::update(const std::string & command) {
     char m_buffer[ClientNetwork::DefaultBufferLength] = {};
     if (m_network.sendData(command.c_str()) > 0) {

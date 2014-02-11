@@ -19,9 +19,6 @@ ServerXml::ServerXml(const string & fileXmlPath) : m_fileXmlPath(fileXmlPath) {
 }
 
 
-ServerXml::~ServerXml() { }
-
-
 void ServerXml::update() {
     char buffer[ServerNetwork::DefaultBufferLength] = {};
     if (m_network.receiveData(buffer, ServerNetwork::DefaultBufferLength) > 0) {
@@ -35,10 +32,10 @@ string ServerXml::createXml(const string & command) {
     using std::cout;
     using std::endl;
 
-    string reply;
+    string reply = "Ok";
     string tagNameStr, tagValueStr;
     Command type;
-    reply = "ok";
+    
     if (parseCommand(command, type, tagNameStr, tagValueStr)) {
 
         cout << "Command: \"" << type << "\" tag name: \"" << tagNameStr << "\"";

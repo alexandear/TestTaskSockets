@@ -9,10 +9,10 @@ class ServerXml  {
 
 public:
     ServerXml(const string & fileXmlPath = "ServerXML.xml");
-    ~ServerXml();    
     void update();
     string fileXmlPath() const { return m_fileXmlPath; }
-    string & xmlFilePath() { return m_fileXmlPath; }
+    string & fileXmlPath() { return m_fileXmlPath; }
+
 private:
     ServerNetwork m_network;
 
